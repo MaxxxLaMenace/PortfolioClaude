@@ -18,7 +18,7 @@ export interface Project {
 export interface Skill {
   _id: string;
   name: string;
-  category: 'frontend' | 'backend' | 'tools' | 'other';
+  category: 'frontend' | 'backend' | 'tools' | 'language' | 'other';
   level: number;
   icon: string;
   order: number;

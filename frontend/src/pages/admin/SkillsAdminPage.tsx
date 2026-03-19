@@ -18,6 +18,7 @@ const categoryLabels = {
   frontend: 'Frontend',
   backend: 'Backend',
   tools: 'Outils',
+  language: 'Langage',
   other: 'Autres',
 };
 
@@ -209,6 +210,7 @@ const SkillsAdminPage: React.FC = () => {
                 <option value="frontend">Frontend</option>
                 <option value="backend">Backend</option>
                 <option value="tools">Outils</option>
+                <option value="language">Langage</option>
                 <option value="other">Autres</option>
               </select>
             </div>
