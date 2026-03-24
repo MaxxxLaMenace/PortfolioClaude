@@ -1,4 +1,4 @@
-# Portfolio Claude
+# Portfolio
 
 Application full-stack de portfolio avec interface d'administration, construite avec React, Node.js/Express, MongoDB et TypeScript.
 
