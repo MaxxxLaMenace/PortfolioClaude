@@ -21,3 +21,7 @@ uploads/
 # OS
 .DS_Store
 Thumbs.db
+
+# LibreOffice temp files
+.~lock.*
+*.tmp
