@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import Button from '../../components/ui/Button';
+import { useSendContact } from '../../hooks/useContact';
 
 interface ContactForm {
   name: string;
@@ -12,6 +13,7 @@ const ContactPage: React.FC = () => {
   const [form, setForm] = useState<ContactForm>({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<ContactForm>>({});
+  const sendContact = useSendContact();
 
   const validate = (): boolean => {
     const newErrors: Partial<ContactForm> = {};
@@ -26,10 +28,13 @@ const ContactPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
-      setForm({ name: '', email: '', message: '' });
-    }
+    if (!validate()) return;
+    sendContact.mutate(form, {
+      onSuccess: () => {
+        setSubmitted(true);
+        setForm({ name: '', email: '', message: '' });
+      },
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -109,7 +114,12 @@ const ContactPage: React.FC = () => {
                   {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
                 </div>
 
-                <Button type="submit" variant="primary" size="lg" className="w-full">
+                {sendContact.isError && (
+                  <p className="text-sm text-red-400">
+                    Une erreur est survenue. Veuillez réessayer.
+                  </p>
+                )}
+                <Button type="submit" variant="primary" size="lg" className="w-full" isLoading={sendContact.isPending}>
                   Envoyer le message
                 </Button>
               </form>

@@ -6,6 +6,7 @@ import { connectDatabase } from './config/database';
 import authRoutes from './routes/authRoutes';
 import projectRoutes from './routes/projectRoutes';
 import skillRoutes from './routes/skillRoutes';
+import contactRoutes from './routes/contactRoutes';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/skills', skillRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {
