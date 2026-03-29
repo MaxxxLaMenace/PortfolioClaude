@@ -49,6 +49,9 @@ PORT=3000
 MONGO_URI=mongodb://localhost:27017/portfolio
 JWT_SECRET=your_secret_here
 JWT_EXPIRES_IN=7d
+
+# Email — pour le formulaire de contact (https://resend.com)
+RESEND_API_KEY=your_resend_api_key
 ```
 
 Installer les dépendances et démarrer :
@@ -71,6 +74,16 @@ npm run dev
 ```
 
 Le frontend tourne sur [http://localhost:5173](http://localhost:5173).
+
+### 5. Créer l'administrateur initial
+
+À effectuer **une seule fois** après le premier démarrage du backend :
+
+```bash
+curl -X POST http://localhost:3000/api/auth/seed
+```
+
+Crée le compte admin par défaut : `admin@portfolio.com` / `admin123456`.
 
 ## Scripts disponibles
 
@@ -113,7 +126,7 @@ PortfolioClaude/
 │       │   ├── admin/      # Dashboard, LoginPage, ProjectsAdmin, SkillsAdmin
 │       │   └── public/     # Home, Projects, Skills, Contact
 │       └── types/          # Interfaces TypeScript
-├── documentation/          # Présentation du projet
+├── documentation/          # Présentation, rapport et vidéo du projet
 └── docker-compose.yml
 ```
 
@@ -131,6 +144,7 @@ PortfolioClaude/
 | POST | `/api/skills` | Créer une compétence | Oui |
 | PUT | `/api/skills/:id` | Modifier une compétence | Oui |
 | DELETE | `/api/skills/:id` | Supprimer une compétence | Oui |
+| POST | `/api/contact` | Envoyer un message de contact | Non |
 
 Les routes protégées requièrent un header `Authorization: Bearer <token>`.
 
